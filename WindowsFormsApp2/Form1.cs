@@ -127,7 +127,7 @@ namespace WindowsFormsApp2
             }
             return rezultat;
         }
-        private void Form1_Load(object sender, EventArgs e)  // Form load Method
+        private void Form1_Load(object sender, EventArgs e)
         {
             Prikazi();
         }
