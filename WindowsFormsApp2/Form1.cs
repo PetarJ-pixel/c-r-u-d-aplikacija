@@ -155,7 +155,7 @@ namespace WindowsFormsApp2
         {
             if (dataGridView1.Rows.Count > 0)
             {
-                foreach (DataGridViewRow row in dataGridView1.SelectedRows) // foreach datagridview selected rows values  
+                foreach (DataGridViewRow row in dataGridView1.SelectedRows)
                 {
                     textId.Text = row.Cells[0].Value.ToString();
                     textOIB.Text = row.Cells[1].Value.ToString();
