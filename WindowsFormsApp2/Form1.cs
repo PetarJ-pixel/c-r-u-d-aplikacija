@@ -68,19 +68,19 @@ namespace WindowsFormsApp2
             }
             return rezultat;
         }
-        public void PrikaziStatus(bool rezultat, string Action)
+        public void PrikaziStatus(bool rezultat, string action)
         {
             if (rezultat)
             {
-                if (Action == "NovaOsoba")
+                if (action == "NovaOsoba")
                 {
                     MessageBox.Show("Sacuvano uspesno!..", "Save", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
-                else if (Action == "Izmjena")
+                else if (action == "Izmjena")
                 {
                     MessageBox.Show("Azurirano uspesno!..", "Update", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
-                else if (Action == "Brisanje")
+                else if (action == "Brisanje")
                 {
                     MessageBox.Show("Ponisteno uspesno..", "Brisanje", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
@@ -129,10 +129,10 @@ namespace WindowsFormsApp2
         }
         private void Form1_Load(object sender, EventArgs e)  // Form load Method
         {
-            Display();
+            Prikazi();
         }
 
-        public void Display()
+        public void Prikazi()
         {
             using (MbanqEntities _entity = new MbanqEntities())
             {
