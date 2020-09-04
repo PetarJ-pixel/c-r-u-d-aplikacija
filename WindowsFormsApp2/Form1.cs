@@ -28,16 +28,19 @@ namespace WindowsFormsApp2
             bool rezultat = SacuvajDetalje(osoba);
             PrikaziStatus(rezultat, "NovaOsoba");
         }
-        public bool SacuvajDetalje(Osoba osoba)
+
+        private void izmeni_Click(object sender, EventArgs e)
         {
-            bool rezultat = false;
-            using (MbanqEntities _entity = new MbanqEntities())
-            {
-                _entity.Osobas.Add(osoba);
-                _entity.SaveChanges();
-                rezultat = true;
-            }
-            return rezultat;
+            Osoba osoba = PodesiVrednosti(Convert.ToInt32(textId.Text), textOIB.Text, textIme.Text, textMjesto.Text, textAdresa.Text, textTelefon.Text, textMail.Text);
+            bool rezultat = AzurirajOsobu(osoba);
+            PrikaziStatus(rezultat, "Izmjena");
+        }
+
+        private void brisanje_Click(object sender, EventArgs e)
+        {
+            Osoba osoba = PodesiVrednosti(Convert.ToInt32(textId.Text), textOIB.Text, textIme.Text, textMjesto.Text, textAdresa.Text, textTelefon.Text, textMail.Text);
+            bool result = PonistiOsobu(osoba);
+            PrikaziStatus(result, "Brisanje");
         }
         public Osoba PodesiVrednosti(int Id, string oib, string ime, string mjesto, string adresa, string telefon, string email)
         {
@@ -64,6 +67,18 @@ namespace WindowsFormsApp2
                 osoba.Telefon = os.Telefon;
                 osoba.Email = os.Email;
                 _entity.SaveChanges();
+                rezultat = true;
+            }
+            return rezultat;
+        }
+        public bool PonistiOsobu(Osoba os)
+        {
+            bool rezultat = false;
+            using (MbanqEntities entity = new MbanqEntities())
+            {
+                Osoba osoba = entity.Osobas.Where(x => x.Id == os.Id).Select(x => x).FirstOrDefault();
+                entity.Osobas.Remove(osoba);
+                entity.SaveChanges();
                 rezultat = true;
             }
             return rezultat;
@@ -101,28 +116,13 @@ namespace WindowsFormsApp2
             textTelefon.Text = "";
             textMail.Text = "";
         }
-
-        private void izmeni_Click(object sender, EventArgs e)
-        {
-            Osoba osoba = PodesiVrednosti(Convert.ToInt32(textId.Text), textOIB.Text, textIme.Text, textMjesto.Text, textAdresa.Text, textTelefon.Text, textMail.Text);
-            bool rezultat = AzurirajOsobu(osoba);
-            PrikaziStatus(rezultat, "Izmjena");
-        }
-
-        private void brisanje_Click(object sender, EventArgs e)
-        {
-            Osoba osoba = PodesiVrednosti(Convert.ToInt32(textId.Text), textOIB.Text, textIme.Text, textMjesto.Text, textAdresa.Text, textTelefon.Text, textMail.Text);
-            bool result = PonistiOsobu(osoba);
-            PrikaziStatus(result, "Brisanje");
-        }
-        public bool PonistiOsobu(Osoba os)
+        public bool SacuvajDetalje(Osoba osoba)
         {
             bool rezultat = false;
-            using (MbanqEntities entity = new MbanqEntities())
+            using (MbanqEntities _entity = new MbanqEntities())
             {
-                Osoba osoba = entity.Osobas.Where(x => x.Id == os.Id).Select(x => x).FirstOrDefault();
-                entity.Osobas.Remove(osoba);
-                entity.SaveChanges();
+                _entity.Osobas.Add(osoba);
+                _entity.SaveChanges();
                 rezultat = true;
             }
             return rezultat;
